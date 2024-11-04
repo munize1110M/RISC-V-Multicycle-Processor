@@ -86,6 +86,7 @@ always_ff @(posedge clk ) begin
     else 
         state <= next_state;    
 end
+/*
 always_comb begin
         Branch = 1'b0;
         PCUpdate = 1'b0;
@@ -231,7 +232,75 @@ always_comb begin
         ALUOp = 2'b01;
     end
 
+end*/
+always_comb begin
+    // Set default values for all signals
+    Branch = 1'b0;
+    PCUpdate = 1'b0;
+    RegWrite = 1'b0;
+    MemWrite = 1'b0;
+    IRWrite = 1'b0;
+    ResultSrc = 2'b00;
+    ALUSrcB = 2'b00;
+    ALUSrcA = 2'b00;
+    AdrSrc = 1'b0;
+    ALUOp = 2'b00;
+
+    // Use a case statement to assign values based on the state
+    case (state)
+        FETCH: begin
+            PCUpdate = 1'b1;
+            IRWrite = 1'b1;
+            ResultSrc = 2'b10;
+            ALUSrcB = 2'b10;
+        end
+        DECODE: begin
+            ALUSrcB = 2'b01;
+            ALUSrcA = 2'b01;
+        end
+        MEMADR: begin
+            ALUSrcB = 2'b01;
+            ALUSrcA = 2'b10;
+        end
+        MEMREAD: begin
+            AdrSrc = 1'b1;
+        end
+        MEMWB: begin
+            RegWrite = 1'b1;
+            ResultSrc = 2'b01;
+        end
+        MEMWRITE: begin
+            MemWrite = 1'b1;
+            AdrSrc = 1'b1;
+        end
+        EXECUTER: begin
+            ALUSrcA = 2'b10;
+            ALUOp = 2'b10;
+        end
+        EXECUTEEL: begin
+            ALUSrcB = 2'b01;
+            ALUSrcA = 2'b10;
+            ALUOp = 2'b10;
+        end
+        JAL: begin
+            PCUpdate = 1'b1;
+            ALUSrcB = 2'b10;
+            ALUSrcA = 2'b01;
+        end
+        ALUWB: begin
+            RegWrite = 1'b1;
+        end
+        BEQ: begin
+            Branch = 1'b1;
+            ALUSrcA = 2'b10;
+            ALUOp = 2'b01;
+        end
+        default: begin
+            // Default case is handled by the initial assignments
+        end
+    endcase
 end
+
 
 endmodule
 
