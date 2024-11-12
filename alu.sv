@@ -2,8 +2,8 @@ module alu(input  logic signed [31:0] a,
            input  logic [31:0] b,
            input  logic [2:0]  alucontrol,
            output logic [31:0] result,
-           output logic        zero,
-           output logic        less_than);
+           output logic        zero);
+           //output logic        less_than);
 
   logic [31:0] condinvb, sum;
   logic        v;              // overflow
@@ -32,6 +32,6 @@ module alu(input  logic signed [31:0] a,
   assign v = ~(alucontrol[0] ^ a[31] ^ b[31]) & (a[31] ^ sum[31]) & isAddSub;
   //Compares rs1 sign bit to result sign bit.
   //if a < b, set lt flag high, else, set lt flag low
-  assign less_than = (a < b) ? 1'b1 : 1'b0;
+  //assign less_than = (a < b) ? 1'b1 : 1'b0;
   
 endmodule

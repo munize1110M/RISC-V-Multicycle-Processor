@@ -3,7 +3,7 @@ module riscmulti ( input clk,
         input logic [31:0] ReadData,
         output WriteEnable,
         output logic [31:0] Address,
-        output logic [31:0] WriteData)
+        output logic [31:0] WriteData);
 
         logic [31:0] instr;
         logic zero;
@@ -21,7 +21,7 @@ module riscmulti ( input clk,
                     alusrcB, resultsrc, adrsrc, alucontrol, irwrite, pcwrite, regwrite, WriteEnable);
 
         datapath data(clk, reset, pcwrite, adrsrc, irwrite, resultsrc, alucontrol,
-                    alusrcB, alusrcA, immsrc, regwrite, ReadData, WriteData, Address, zero);
+                    alusrcB, alusrcA, immsrc, regwrite, ReadData, instr, WriteData, Address, zero);
 
 
 endmodule

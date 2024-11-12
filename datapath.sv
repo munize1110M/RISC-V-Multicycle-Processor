@@ -17,7 +17,7 @@ module datapath(input clk,
                 output Zero);
 
     logic [31:0] Result;
-    logic [31:0] PC,
+    logic [31:0] PC;
     logic [31:0] OldPC;
     //logic [31:0] Instruction
     logic [31:0] Data;

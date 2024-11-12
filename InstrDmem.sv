@@ -7,7 +7,7 @@ module InstrDmem( input clk,
     logic [31:0] RAM[127:0];
 
     initial
-        $readmemh(machinecode, INSTR_MEM);
+       $readmemh("machinecode_TestProgram.txt", INSTR_MEM);
 
     
 

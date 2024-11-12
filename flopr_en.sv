@@ -1,5 +1,5 @@
-module flopr #(parameter WIDTH = 8)
-              (input  logic             clk, reset,enable
+module flopr_en #(parameter WIDTH = 8)
+              (input  logic             clk, reset,enable,
                input  logic [WIDTH-1:0] d, 
                output logic [WIDTH-1:0] q);
 

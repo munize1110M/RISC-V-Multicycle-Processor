@@ -3,7 +3,7 @@ module top(input clk, reset,
         output logic MemWrite);
 
 
-    logic [31:0] ReadData
+    logic [31:0] ReadData;
 
     riscmulti processor(clk, reset, ReadData, MemWrite, DataAdr, WriteData);
 
